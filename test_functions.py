@@ -15,3 +15,9 @@ def grading_system():
     gradingSystem.load_data()
     return gradingSystem
 
+def test_check_password(grading_system):
+    username = "akend3"
+    correct_password = "123454321"
+    incorrect_password = "wrongPassword123"
+    assert grading_system.check_password(username, correct_password) == True
+    assert grading_system.check_password(username, incorrect_password) == False
