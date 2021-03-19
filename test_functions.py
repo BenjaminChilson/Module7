@@ -46,3 +46,12 @@ def test_change_grade(grading_system, professor_user, student_user):
     professor_user.change_grade(student_name, course, assignment, new_grade)
     grading_system.reload_data()
     assert grading_system.users[student_name]['courses'][course][assignment]['grade'] == new_grade
+
+def test_create_assignment(grading_system, professor_user):
+    assignment_name = "test_assignment"
+    due_date = "2/1/21"
+    course = 'comp_sci'
+    professor_user.create_assignment(assignment_name, due_date, course)
+    grading_system.reload_data()
+    assert assignment_name in grading_system.courses[course]['assignments']
+    assert grading_system.courses[course]['assignments'][assignment_name]['due_date'] == due_date
